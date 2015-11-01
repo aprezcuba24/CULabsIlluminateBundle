@@ -1,0 +1,18 @@
+parameters:
+    cu_labs_illuminate.container.class: CULabs\IlluminateBundle\Bridge\Container\Container
+    cu_labs_illuminate.bus_dispatcher.class: Illuminate\Contracts\Bus\Dispatcher
+
+services:
+    cu_labs_illuminate.container:
+        class: %cu_labs_illuminate.container.class%
+        arguments:
+            - @kernel
+            - %cu_labs_illuminate.container_config%
+
+    cu_labs_illuminate.bus_dispatcher:
+        class: %cu_labs_illuminate.bus_dispatcher.class%
+        factory: ["@cu_labs_illuminate.container", getBusDispatcher]
+
+    bus_dispatcher:
+        alias: cu_labs_illuminate.bus_dispatcher
+

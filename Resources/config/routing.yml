@@ -1,0 +1,3 @@
+cu_labs_illuminate_homepage:
+    path:     /illimunate
+    defaults: { _controller: CULabsIlluminateBundle:Default:index }
