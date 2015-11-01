@@ -1,0 +1,35 @@
+{
+    "name": "culabs/illuminate-bundle",
+    "type": "symfony-bundle",
+    "description": "Integrate laravel-Illuminate in symfony2",
+    "keywords": ["symfony2-bundle", "laravel", "Illuminate"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Renier Ricardo Figueredo",
+            "email": "aprezcuba24@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "illuminate/encryption": "^5.1",
+        "illuminate/config": "^5.1",
+        "illuminate/database": "^5.1",
+        "illuminate/events": "^5.1",
+        "illuminate/container": "^5.1",
+        "illuminate/queue": "^5.1",
+        "illuminate/bus": "^5.1",
+        "illuminate/redis": "^5.1"
+    },
+    "suggest": {
+        "predis/predis": "For Redis",
+        "mtdowling/cron-expression": "For Cron"
+    },
+    "autoload": {
+        "psr-0": {
+            "CULabs\\IlluminateBundle": ""
+        }
+    },
+    "target-dir": "CULabs/IlluminateBundle"
+}
