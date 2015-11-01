@@ -10,7 +10,7 @@ Instlación
 ```json
 {
     "require": {
-        "culabs/illuminate-bundle": "1.0.*@dev"
+        "culabs/illuminate-bundle": "dev-master"
     }
 }
 ```
