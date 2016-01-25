@@ -63,7 +63,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('prefix')->defaultValue('')->end()
                                         ->scalarNode('database')->isRequired()->cannotBeEmpty()->end()
                                         ->scalarNode('username')->isRequired()->cannotBeEmpty()->end()
-                                        ->scalarNode('password')->isRequired()->cannotBeEmpty()->end()
+                                        ->scalarNode('password')->defaultValue('')->end()
                                         ->booleanNode('strict')->defaultValue(false)->end()
                                     ->end()
                                 ->end()
