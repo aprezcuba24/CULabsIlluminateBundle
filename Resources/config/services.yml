@@ -7,6 +7,7 @@ services:
         class: %cu_labs_illuminate.container.class%
         arguments:
             - @kernel
+            - @service_container
             - %cu_labs_illuminate.container_config%
 
     cu_labs_illuminate.bus_dispatcher:

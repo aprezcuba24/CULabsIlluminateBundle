@@ -2,12 +2,19 @@
 
 namespace CULabs\IlluminateBundle;
 
+use CULabs\IlluminateBundle\Bridge\Container\BridgeContainerPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\Console\Application;
 use CULabs\IlluminateBundle\Bridge\Console\Application as BridgeApplication;
 
 class CULabsIlluminateBundle extends Bundle
 {
+    public function build(ContainerBuilder $container)
+    {
+        $container->addCompilerPass(new BridgeContainerPass());
+    }
+
     public function registerCommands(Application $application)
     {
         if (!defined('ARTISAN_BINARY')) {

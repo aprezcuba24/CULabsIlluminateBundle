@@ -19,14 +19,19 @@ use Illuminate\Events\EventServiceProvider;
 use Illuminate\Queue\QueueServiceProvider;
 use Illuminate\Redis\RedisServiceProvider;
 use Illuminate\Support\ServiceProvider;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 class Container extends BaseContainer implements ContractApplication
 {
-    public function __construct(KernelInterface $kernel, $configs)
+    protected $container;
+    protected $servicesAliasBridge = [];
+
+    public function __construct(KernelInterface $kernel, ContainerInterface $container, $configs)
     {
+        $this->container = $container;
         $this->instance('config', $config = new Repository());
-        $this->alias('queue.connection', \Illuminate\Contracts\Queue\Queue::class);
+        $this->alias('queue', \Illuminate\Contracts\Queue\Factory::class);
         foreach ($configs as $key => $item) {
             $config->set($key, $item);
         }
@@ -38,6 +43,23 @@ class Container extends BaseContainer implements ContractApplication
             $this->register($provider);
         }
         $this->registerSchedule($kernel);
+    }
+
+    public function build($concrete, array $parameters = [])
+    {
+        if (is_string($concrete) && in_array($concrete, array_keys($this->servicesAliasBridge))) {
+            return $this->servicesAliasBridge[$concrete];
+        }
+
+        return parent::build($concrete, $parameters);
+    }
+
+    public function bridgeService($service, $alias = '')
+    {
+        if (!$alias) {
+            $alias = get_class($service);
+        }
+        $this->servicesAliasBridge[$alias] = $service;
     }
 
     protected function registerSchedule(KernelInterface $kernel)
