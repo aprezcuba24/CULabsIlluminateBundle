@@ -31,6 +31,10 @@ class Container extends BaseContainer implements ContractApplication
     {
         $this->container = $container;
         $this->instance('config', $config = new Repository());
+        $this->singleton(
+            \Illuminate\Contracts\Debug\ExceptionHandler::class,
+            \CULabs\IlluminateBundle\Bridge\Foundation\Exceptions\Handler::class
+        );
         $this->alias('queue', \Illuminate\Contracts\Queue\Factory::class);
         foreach ($configs as $key => $item) {
             $config->set($key, $item);
